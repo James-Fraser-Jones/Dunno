@@ -15,24 +15,17 @@ func _physics_process(delta):
 		var root: Viewport = get_node("/root")
 		var mouse_position: Vector2 = root.get_mouse_position()
 		var panning_camera: Camera = get_node("/root/Main/Panning_Camera")
+		var space_state: PhysicsDirectSpaceState = get_world().direct_space_state
 		#Calculate vectors
 		var from: Vector3 = panning_camera.project_ray_origin(mouse_position)
-		var to: Vector3 = panning_camera.project_ray_normal(mouse_position) * ray_length
-		#Create ray and add to the scene
-		var ray: RayCast = RayCast.new()
-		root.add_child(ray)
-		#Cast ray and get collision
-		ray.translation = from
-		ray.cast_to = to
-		ray.force_raycast_update()
-		if ray.is_colliding():
+		var to: Vector3 = from + panning_camera.project_ray_normal(mouse_position) * ray_length
+		#Cast ray
+		var result = space_state.intersect_ray(from, to)
+		if result:
 			old_pos = Vector2(self.translation.x, self.translation.z)
-			new_pos = Vector2(ray.get_collision_point().x, ray.get_collision_point().z)
+			new_pos = Vector2(result.position.x, result.position.z)
 			total_distance = (new_pos - old_pos).length()
 			distance = 0
-		#Remove ray
-		root.remove_child(ray)
-		ray.free()
 	
 	if old_pos != new_pos:
 		distance += player_speed*delta/total_distance

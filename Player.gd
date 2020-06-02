@@ -1,6 +1,6 @@
 extends MeshInstance
 
-export var player_speed: float = 35
+export var player_speed: float = 30
 
 var old_pos: Vector2 = Vector2(0,0)
 var new_pos: Vector2 = Vector2(0,0)
@@ -10,7 +10,7 @@ var distance: float = 0
 const ray_length = 1000
 		
 func _physics_process(delta):
-	if Input.is_action_just_pressed("right_click"):
+	if Input.is_action_pressed("right_click"):
 		#Get refs
 		var root: Viewport = get_node("/root")
 		var mouse_position: Vector2 = root.get_mouse_position()

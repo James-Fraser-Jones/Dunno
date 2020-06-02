@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://texture_09.png" type="Texture" id=1]
+[ext_resource path="res://Camera2D.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 40.0
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 440, 976, 568, 608, 1048, 864 )
+polygons = [ PoolIntArray( 0, 1, 2 ) ]
+outlines = [ PoolVector2Array( 440, 976, 568, 608, 1048, 864 ) ]
+
+[node name="Main2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1024, 1024 )
+current = true
+script = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 2048 )
+
+[node name="Player" type="Polygon2D" parent="."]
+position = Vector2( 464, 1336 )
+color = Color( 0.0313726, 1, 0, 1 )
+polygon = PoolVector2Array( 0, -40, 32, 24, -32, 24 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance3" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( -184, 488 )
+navpoly = SubResource( 2 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Navigation2D"]
+polygon = PoolVector2Array( 912, 1176, 984, 1128, 1016, 1264, 920, 1272 )

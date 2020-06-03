@@ -1,4 +1,4 @@
-extends Polygon2D
+extends KinematicBody2D
 
 #Evironment variables
 export var player_speed: float = 400
@@ -13,20 +13,22 @@ onready var nav: Navigation2D = get_node("/root/Main2D/Navigation2D")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right_click"):
-		path = nav.get_simple_path(self.position, get_global_mouse_position())
+		path = nav.get_simple_path(position, get_global_mouse_position())
 		path_length = vector_array_length(path)
 		progress = 0
 		
 	if !path.empty():
-		if self.position == path[path.size() - 1]: #you've arrived at your destination
+		if position == path[path.size() - 1]: #you've arrived at your destination
 			path = PoolVector2Array()
 			path_length = 0
 			progress = 0
 		else: #move a bit 
 			progress += (player_speed / path_length) * delta
 			var new_pos: Vector2 = interpolate_vector_array(progress, path, path_length)
-			self.rotation = (new_pos - self.position).angle() + PI/2
-			self.position = new_pos
+			var new_rot: float = (new_pos - position).angle() + PI/2
+			position = new_pos
+			#move_and_slide(Vector2.ZERO)
+			rotation = new_rot
 
 #Takes a progress value between 0 and 1
 #And a PoolVector2Array produced by Navigation2D's "get_simple_path" method

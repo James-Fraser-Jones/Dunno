@@ -68,5 +68,4 @@ polygon = PoolVector2Array( 0, -40, 32, 24, -32, 24 )
 
 [node name="PolygonOffsetTool" type="Node2D" parent="."]
 script = ExtResource( 6 )
-target = NodePath("../Polygon2D4")
-offset_width = -10.0
+offset_width = 10.0

@@ -1,15 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://texture_09.png" type="Texture" id=1]
 [ext_resource path="res://Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Player2D.gd" type="Script" id=3]
+[ext_resource path="res://NavPolyGen.gd" type="Script" id=4]
+[ext_resource path="res://NavigationPolygon.tres" type="NavigationPolygon" id=5]
 
-[sub_resource type="NavigationPolygon" id=2]
-vertices = PoolVector2Array( 848, -248, 880, -160, 840, -80, 760, -24, 544, -80, 512, -216, 784, -280, 952, -184, 1576, -1344, 1568, 696, 928, -40, 928, -288, 232, -192, 240, -472, 400, -296, 440, -168, 448, -72, 760, -392, 840, -376, 616, -312, -472, -1344, 584, -504, 832, 64, -472, 704, 512, -400, 264, -536, 520, -304, 192, -488 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 8, 7, 11 ), PoolIntArray( 12, 13, 14, 15, 16 ), PoolIntArray( 17, 18, 6, 19 ), PoolIntArray( 8, 11, 18 ), PoolIntArray( 20, 8, 18, 17, 21 ), PoolIntArray( 22, 10, 9 ), PoolIntArray( 22, 9, 23 ), PoolIntArray( 4, 3, 22, 23, 16 ), PoolIntArray( 20, 21, 24, 25 ), PoolIntArray( 6, 5, 14, 26 ), PoolIntArray( 14, 5, 15 ), PoolIntArray( 12, 16, 23 ), PoolIntArray( 12, 23, 20, 27 ), PoolIntArray( 25, 27, 20 ), PoolIntArray( 14, 25, 24, 26 ), PoolIntArray( 6, 26, 19 ) ]
-outlines = [ PoolVector2Array( -472, 704, -472, -1344, 1576, -1344, 1568, 696 ), PoolVector2Array( 448, -72, 440, -168, 512, -216, 544, -80 ), PoolVector2Array( 232, -192, 192, -488, 264, -536, 400, -296, 240, -472 ), PoolVector2Array( 520, -304, 512, -400, 584, -504, 760, -392, 616, -312 ), PoolVector2Array( 760, -24, 840, -80, 880, -160, 848, -248, 784, -280, 840, -376, 928, -288, 952, -184, 928, -40, 832, 64 ) ]
-
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 40.0
 
 [node name="Main2D" type="Node2D"]
@@ -27,9 +24,10 @@ region_rect = Rect2( 0, 0, 2048, 2048 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
-[node name="NavigationPolygonInstance3" type="NavigationPolygonInstance" parent="Navigation2D"]
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 position = Vector2( 472, 1344 )
-navpoly = SubResource( 2 )
+navpoly = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="."]
 position = Vector2( 344, -88 )
@@ -44,6 +42,16 @@ polygon = PoolVector2Array( 912, 1176, 984, 1128, 1016, 1264, 920, 1272 )
 position = Vector2( -248, -320 )
 color = Color( 0.00784314, 0, 1, 1 )
 polygon = PoolVector2Array( 912, 1176, 984, 1128, 1120, 1368, 960, 1192, 952, 1472 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="."]
+position = Vector2( -613.661, -928.76 )
+color = Color( 0.00784314, 0, 1, 1 )
+polygon = PoolVector2Array( 912, 1176, 987.346, 1087.18, 1185.68, 1041.75, 1358.19, 1150.11, 1305.64, 1385.02, 1126.37, 1499.38, 952, 1472, 820.033, 1342.03 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="."]
+position = Vector2( -156.215, -928.76 )
+color = Color( 0.00784314, 0, 1, 1 )
+polygon = PoolVector2Array( 888.378, 1091.39, 1042.92, 1035.75, 1296.37, 1109.93, 1500.37, 1301.57, 1305.64, 1385.02, 820.033, 1342.03 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 1088, 928 )
@@ -61,7 +69,7 @@ position = Vector2( 584, 1240 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Player2D"]
 color = Color( 0.0313726, 1, 0, 1 )

@@ -8,12 +8,14 @@ var path: PoolVector2Array = PoolVector2Array()
 var path_length: float = 0
 var progress: float = 0
 
+var a_star: AStar2D = AStar2D.new()
+
 #References
 onready var nav: Navigation2D = get_node("/root/Main2D/Navigation2D")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right_click"):
-		path = nav.get_simple_path(position, get_global_mouse_position())
+		path = nav.get_simple_path(position, get_global_mouse_position(), true)
 		path_length = vector_array_length(path)
 		progress = 0
 		

@@ -29,8 +29,10 @@ func _physics_process(delta: float) -> void:
 			var new_pos: Vector2 = interpolate_vector_array(progress, path, path_length)
 			var new_rot: float = (new_pos - position).angle() + PI/2
 			position = new_pos
-			#move_and_slide(Vector2.ZERO)
 			rotation = new_rot
+			move_and_slide(Vector2.ZERO)
+			#move_and_slide((new_pos - position)/delta)
+			
 
 #Takes a progress value between 0 and 1
 #And a PoolVector2Array produced by Navigation2D's "get_simple_path" method

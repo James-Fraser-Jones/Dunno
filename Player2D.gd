@@ -30,8 +30,6 @@ func _physics_process(delta: float) -> void:
 			var new_rot: float = (new_pos - position).angle() + PI/2
 			position = new_pos
 			rotation = new_rot
-			move_and_slide(Vector2.ZERO)
-			#move_and_slide((new_pos - position)/delta)
 			
 
 #Takes a progress value between 0 and 1

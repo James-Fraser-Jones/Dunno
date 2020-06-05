@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://texture_09.png" type="Texture" id=1]
 [ext_resource path="res://Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Player2D.gd" type="Script" id=3]
-[ext_resource path="res://NavPolyGen.gd" type="Script" id=4]
-[ext_resource path="res://NavigationPolygon.tres" type="NavigationPolygon" id=5]
-[ext_resource path="res://PolygonOffsetTool.gd" type="Script" id=6]
+[ext_resource path="res://Nav-40.tres" type="NavigationPolygon" id=4]
+[ext_resource path="res://NavBakerTool.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.0
@@ -24,36 +23,10 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-position = Vector2( 472, 1344 )
-navpoly = ExtResource( 5 )
-script = ExtResource( 4 )
-
-[node name="Polygon2D2" type="Polygon2D" parent="."]
-position = Vector2( 344, -88 )
-color = Color( 0.00784314, 0, 1, 1 )
-polygon = PoolVector2Array( 912, 1152, 968, 1056, 1056, 1144, 1080, 1248, 1056, 1392, 960, 1496, 888, 1408, 968, 1352, 1008, 1272, 976, 1184 )
-
-[node name="Polygon2D3" type="Polygon2D" parent="."]
-color = Color( 0.00784314, 0, 1, 1 )
-polygon = PoolVector2Array( 912, 1176, 984, 1128, 1016, 1264, 920, 1272 )
-
-[node name="Polygon2D4" type="Polygon2D" parent="."]
-position = Vector2( 58.4259, -712.946 )
-color = Color( 0.00784314, 0, 1, 1 )
-polygon = PoolVector2Array( 605.574, 1568.95, 677.574, 1520.95, 813.574, 1760.95, 653.574, 1584.95, 645.574, 1864.95 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 1088, 928 )
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-position = Vector2( 96, -72 )
-color = Color( 0.00784314, 0, 1, 1 )
-polygon = PoolVector2Array( -200, 88, -128, -16, 48, 96, -96, 176, -192, 184 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( -96, 112, -104, 16, -32, -88, 144, 24, 0, 104 )
+navpoly = ExtResource( 4 )
 
 [node name="Player2D" type="KinematicBody2D" parent="."]
 position = Vector2( 584, 1240 )
@@ -66,6 +39,22 @@ shape = SubResource( 1 )
 color = Color( 0.0313726, 1, 0, 1 )
 polygon = PoolVector2Array( 0, -40, 32, 24, -32, 24 )
 
-[node name="PolygonOffsetTool" type="Node2D" parent="."]
+[node name="NavBakerTool" type="Node2D" parent="."]
 script = ExtResource( 6 )
-offset_width = 10.0
+nav_radius = 40
+
+[node name="Polygon2D" type="Polygon2D" parent="NavBakerTool"]
+color = Color( 0, 0.0627451, 1, 1 )
+polygon = PoolVector2Array( 664, 856, 704, 1152, 712, 880, 872, 1048, 736, 808 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="NavBakerTool"]
+color = Color( 0, 0.0627451, 1, 1 )
+polygon = PoolVector2Array( 984, 944, 992, 1040, 1088, 1032, 1232, 952, 1056, 840 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="NavBakerTool"]
+color = Color( 0, 0.0627451, 1, 1 )
+polygon = PoolVector2Array( 912, 1176, 920, 1272, 1016, 1264, 984, 1128 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="NavBakerTool"]
+color = Color( 0, 0.0627451, 1, 1 )
+polygon = PoolVector2Array( 1560, 1264, 1480, 1320, 1552, 1408, 1648, 1304, 1672, 1160, 1648, 1056, 1560, 968, 1504, 1064, 1568, 1096, 1600, 1184 )

@@ -31,7 +31,7 @@ func bake_nav() -> void:
 		var new_poly = Geometry.offset_polygon_2d(polygon, nav_radius, Geometry.JOIN_SQUARE)[0]
 		nav.add_outline(new_poly)
 	nav.make_polygons_from_outlines()
-	ResourceSaver.save("Nav-" + String(nav_radius) + ".tres", nav)
+	ResourceSaver.save("resources/Nav-" + String(nav_radius) + ".tres", nav)
 
 #static func get_difference_path(path: PoolVector2Array, path_closed: bool) -> PoolVector2Array:
 #	var difference_path: PoolVector2Array = PoolVector2Array()

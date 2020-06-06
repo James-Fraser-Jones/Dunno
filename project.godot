@@ -16,8 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Dunno"
-run/main_scene="res://Main2D.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/Main.tscn"
+config/icon="res://assets/icon.png"
 
 [input]
 
@@ -39,4 +39,4 @@ right_click={
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://resources/default_env.tres"

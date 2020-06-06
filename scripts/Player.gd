@@ -8,29 +8,33 @@ var path: PoolVector2Array = PoolVector2Array()
 var path_length: float = 0
 var progress: float = 0
 
-var a_star: AStar2D = AStar2D.new()
+var target: Vector2
 
 #References
 onready var nav: Navigation2D = get_node("/root/Main2D/Navigation2D")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("right_click"):
-		path = nav.get_simple_path(position, get_global_mouse_position(), true)
-		path_length = vector_array_length(path)
-		progress = 0
-		
-	if !path.empty():
-		if position == path[path.size() - 1]: #you've arrived at your destination
-			path = PoolVector2Array()
-			path_length = 0
-			progress = 0
-		else: #move a bit 
-			progress += (player_speed / path_length) * delta
-			var new_pos: Vector2 = interpolate_vector_array(progress, path, path_length)
-			var new_rot: float = (new_pos - position).angle() + PI/2
-			position = new_pos
-			rotation = new_rot
-			
+		target = get_global_mouse_position()
+	if (target - position).length() < 10: 
+		position = target
+	if target: move_and_slide((target - position).normalized() * player_speed)
+	#rotation =
+	#	path = nav.get_simple_path(position, get_global_mouse_position(), true)
+	#	path_length = vector_array_length(path)
+	#	progress = 0
+	#	
+	#if !path.empty():
+	#	if position == path[path.size() - 1]: #you've arrived at your destination
+	#		path = PoolVector2Array()
+	#		path_length = 0
+	#		progress = 0
+	#	else: #move a bit 
+	#		progress += (player_speed / path_length) * delta
+	#		var new_pos: Vector2 = interpolate_vector_array(progress, path, path_length)
+	#		var new_rot: float = (new_pos - position).angle() + PI/2
+	#		position = new_pos
+	#		rotation = new_rot
 
 #Takes a progress value between 0 and 1
 #And a PoolVector2Array produced by Navigation2D's "get_simple_path" method

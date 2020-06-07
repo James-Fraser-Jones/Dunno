@@ -11,14 +11,15 @@ var progress: float = 0
 var target: Vector2
 
 #References
-onready var nav: Navigation2D = get_node("/root/Main2D/Navigation2D")
+onready var nav: Navigation2D = get_node("/root/Main/Navigation2D")
 
-func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("right_click"):
-		target = get_global_mouse_position()
-	if (target - position).length() < 10: 
-		position = target
-	if target: move_and_slide((target - position).normalized() * player_speed)
+func _physics_process(_delta: float) -> void:
+	pass
+	#if Input.is_action_pressed("right_click"):
+	#	target = get_global_mouse_position()
+	#if (target - position).length() < 10: 
+	#	position = target
+	#if target: move_and_slide((target - position).normalized() * player_speed)
 	#rotation =
 	#	path = nav.get_simple_path(position, get_global_mouse_position(), true)
 	#	path_length = vector_array_length(path)

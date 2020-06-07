@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resources/Nav-40.tres" type="NavigationPolygon" id=1]
 [ext_resource path="res://assets/texture_09.png" type="Texture" id=2]
@@ -6,6 +6,21 @@
 [ext_resource path="res://scenes/PanningCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Minion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 256, 1664, 0, 0, 0, 0, 256, 768, -151.05, 153.7, 151.05, -153.7, 384, 384, 0, 0, 0, 0, 768, 256, 0, 0, 0, 0, 1664, 256 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 384, 1664, 0, 0, 0, 0, 1664, 384 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 384, 1792, 0, 0, 0, 0, 1280, 1792, -148.281, 150.673, 148.281, -150.673, 1664, 1664, 0, 0, 0, 0, 1792, 1280, 0, 0, 0, 0, 1792, 384 )
+}
 
 [node name="Main" type="Node2D"]
 
@@ -16,14 +31,18 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
+visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
 navpoly = ExtResource( 1 )
 
 [node name="PanningCamera" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1160, 424 )
+position = Vector2( 256, 1664 )
 
 [node name="NavBakerTool" parent="." instance=ExtResource( 3 )]
+visible = false
+run = false
+reset_origin = false
 
 [node name="Polygon2D" type="Polygon2D" parent="NavBakerTool"]
 color = Color( 0, 0.0627451, 1, 1 )
@@ -42,22 +61,43 @@ color = Color( 0, 0.0627451, 1, 1 )
 polygon = PoolVector2Array( 1560, 1264, 1480, 1320, 1552, 1408, 1648, 1304, 1672, 1160, 1648, 1056, 1560, 968, 1504, 1064, 1568, 1096, 1600, 1184 )
 
 [node name="Minion" parent="." instance=ExtResource( 5 )]
-position = Vector2( 992.74, 396.841 )
+lane = 0
 
 [node name="Minion2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1095.87, 394.813 )
 
 [node name="Minion3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1424.47, 401.167 )
+lane = 2
 
 [node name="Minion4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1208.1, 397.003 )
+team = 1
+lane = 0
 
 [node name="Minion5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 881.781, 398.449 )
+team = 1
 
 [node name="Minion6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1316.2, 399.204 )
+team = 1
+lane = 2
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1360, 1024 )
+visible = false
+
+[node name="Top" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Top"]
+position = Vector2( 256, 1664 )
+rotation = -1.5708
+
+[node name="Mid" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Mid"]
+position = Vector2( 384, 1664 )
+rotation = -0.785365
+
+[node name="Bot" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bot"]
+position = Vector2( 384, 1792 )

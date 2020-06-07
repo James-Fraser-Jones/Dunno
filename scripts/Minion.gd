@@ -9,5 +9,6 @@ var max_health: float = 100
 func _physics_process(_delta: float) -> void:
 	var target = get_global_mouse_position()
 	var dir: Vector2 = target - position
-	if dir.length() > threshold:
-		move_and_slide(dir.normalized() * minion_speed)
+	move_and_slide(Vector2.ZERO)
+	#if dir.length() > threshold:
+	#	move_and_slide(dir.normalized() * minion_speed)

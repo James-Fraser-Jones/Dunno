@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 enum Team {BLUE, RED}
 enum Lane {TOP, MID, BOT}
+enum Type {MELEE, RANGED, SEIGE, SUPER}
 
 func lane_to_string(lane) -> String:
 	var name: String

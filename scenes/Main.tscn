@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://resources/Nav-40.tres" type="NavigationPolygon" id=1]
+[ext_resource path="res://scripts/ArenaDrawTool.gd" type="Script" id=1]
 [ext_resource path="res://assets/texture_09.png" type="Texture" id=2]
-[ext_resource path="res://scenes/NavBakerTool.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/NavBakerTool.gd" type="Script" id=3]
 [ext_resource path="res://scenes/PanningCamera.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/Minion.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -25,62 +23,21 @@ _data = {
 [node name="Main" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0.298039, 1 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
+[node name="PanningCamera" parent="." instance=ExtResource( 4 )]
+
 [node name="Navigation2D" type="Navigation2D" parent="."]
 visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = ExtResource( 1 )
-
-[node name="PanningCamera" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320, 1728 )
-
-[node name="NavBakerTool" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="Polygon2D" type="Polygon2D" parent="NavBakerTool"]
-color = Color( 0, 0.0627451, 1, 1 )
-polygon = PoolVector2Array( 664, 856, 704, 1152, 712, 880, 872, 1048, 736, 808 )
-
-[node name="Polygon2D2" type="Polygon2D" parent="NavBakerTool"]
-color = Color( 0, 0.0627451, 1, 1 )
-polygon = PoolVector2Array( 984, 944, 992, 1040, 1088, 1032, 1232, 952, 1056, 840 )
-
-[node name="Polygon2D3" type="Polygon2D" parent="NavBakerTool"]
-color = Color( 0, 0.0627451, 1, 1 )
-polygon = PoolVector2Array( 912, 1176, 920, 1272, 1016, 1264, 984, 1128 )
-
-[node name="Polygon2D4" type="Polygon2D" parent="NavBakerTool"]
-color = Color( 0, 0.0627451, 1, 1 )
-polygon = PoolVector2Array( 1560, 1264, 1480, 1320, 1552, 1408, 1648, 1304, 1672, 1160, 1648, 1056, 1560, 968, 1504, 1064, 1568, 1096, 1600, 1184 )
-
-[node name="Minion" parent="." instance=ExtResource( 5 )]
-lane = 0
-
-[node name="Minion2" parent="." instance=ExtResource( 5 )]
-
-[node name="Minion3" parent="." instance=ExtResource( 5 )]
-lane = 2
-
-[node name="Minion4" parent="." instance=ExtResource( 5 )]
-team = 1
-lane = 0
-
-[node name="Minion5" parent="." instance=ExtResource( 5 )]
-team = 1
-
-[node name="Minion6" parent="." instance=ExtResource( 5 )]
-team = 1
-lane = 2
-
-[node name="Player" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [node name="Top" type="Path2D" parent="."]
+visible = false
 curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Top"]
@@ -88,6 +45,7 @@ position = Vector2( 256, 1664 )
 rotation = -1.5708
 
 [node name="Mid" type="Path2D" parent="."]
+visible = false
 curve = SubResource( 2 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Mid"]
@@ -95,7 +53,14 @@ position = Vector2( 384, 1664 )
 rotation = -0.785365
 
 [node name="Bot" type="Path2D" parent="."]
+visible = false
 curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Bot"]
 position = Vector2( 384, 1792 )
+
+[node name="ArenaDrawTool" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="NavBakerTool" type="Node2D" parent="."]
+script = ExtResource( 3 )

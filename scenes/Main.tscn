@@ -41,8 +41,6 @@ position = Vector2( 320, 1728 )
 
 [node name="NavBakerTool" parent="." instance=ExtResource( 3 )]
 visible = false
-run = false
-reset_origin = false
 
 [node name="Polygon2D" type="Polygon2D" parent="NavBakerTool"]
 color = Color( 0, 0.0627451, 1, 1 )

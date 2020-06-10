@@ -2,13 +2,15 @@ tool
 extends Node2D
 
 export var arena_size: float = 2048
+export var arena_color: Color = Color(0,0.5,0)
 
-export var river_width: float = 200
+export var river_width: float = 250
 export var river_color: Color = Color(0,0,1)
 
 export var lane_width: float = 200
 export var lane_curve: float = 500
 export var lane_color: Color = Color(1,1,0)
+export var corner_color: Color = Color(0,0,0)
 
 export var base_radius: float = 600
 export var base_color: Color = Color(0,1,1)
@@ -23,6 +25,8 @@ func drawH(_b):
 		update()
 		
 func _draw() -> void:
+	#arena
+	draw_rect(Rect2(Vector2(0,0), Vector2(arena_size, arena_size)), arena_color)
 	#river
 	var r: float = river_width/sqrt(2)
 	var river_poly: Array = [Vector2(0,0), Vector2(r,0), Vector2(arena_size,arena_size-r), Vector2(arena_size,arena_size), Vector2(arena_size-r,arena_size), Vector2(0,r)]
@@ -32,13 +36,17 @@ func _draw() -> void:
 	var mid_poly: Array = [Vector2(0,arena_size), Vector2(0,arena_size-m), Vector2(arena_size-m,0), Vector2(arena_size,0), Vector2(arena_size,m), Vector2(m,arena_size)]
 	draw_polygon(PoolVector2Array(mid_poly), PoolColorArray([lane_color]))
 	#top
-	draw_circle_arc_poly(Vector2(lane_curve, lane_curve), lane_curve-lane_width, lane_curve, 270, 360, lane_color)
+	draw_rect(Rect2(Vector2(0, 0), Vector2(lane_width, lane_curve)), corner_color)
 	draw_rect(Rect2(Vector2(0, lane_curve), Vector2(lane_width, arena_size-lane_curve)), lane_color)
+	draw_rect(Rect2(Vector2(0, 0), Vector2(lane_curve, lane_width)), corner_color)
 	draw_rect(Rect2(Vector2(lane_curve, 0), Vector2(arena_size-lane_curve, lane_width)), lane_color)
+	draw_circle_arc_poly(Vector2(lane_curve, lane_curve), lane_curve-lane_width, lane_curve, 270, 360, lane_color)
 	#bottom
-	draw_circle_arc_poly(Vector2(arena_size-lane_curve, arena_size-lane_curve), lane_curve-lane_width, lane_curve, 90, 180, lane_color)
+	draw_rect(Rect2(Vector2(arena_size-lane_curve, arena_size-lane_width), Vector2(lane_curve,lane_width)), corner_color)
 	draw_rect(Rect2(Vector2(0, arena_size-lane_width), Vector2(arena_size-lane_curve,lane_width)), lane_color)
+	draw_rect(Rect2(Vector2(arena_size-lane_width, arena_size-lane_curve), Vector2(lane_width,lane_curve)), corner_color)
 	draw_rect(Rect2(Vector2(arena_size-lane_width, 0), Vector2(lane_width,arena_size-lane_curve)), lane_color)
+	draw_circle_arc_poly(Vector2(arena_size-lane_curve, arena_size-lane_curve), lane_curve-lane_width, lane_curve, 90, 180, lane_color)
 	#bases
 	draw_circle_arc_poly(Vector2(0,arena_size), 0, base_radius, 0, 90, base_color)
 	draw_circle_arc_poly(Vector2(arena_size, 0), 0, base_radius, 180, 270, base_color)

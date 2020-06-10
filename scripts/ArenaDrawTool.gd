@@ -7,16 +7,17 @@ export var arena_color: Color = Color(0,0.5,0)
 export var river_width: float = 250
 export var river_color: Color = Color(0,0,1)
 
-export var lane_width: float = 200
+export var lane_width: float = 250
 export var lane_curve: float = 500
-export var lane_color: Color = Color(1,1,0)
+export var lane_color: Color = Color(0.7,0.7,0)
 export var corner_color: Color = Color(0,0,0)
 
 export var base_radius: float = 600
-export var base_color: Color = Color(0,1,1)
+export var team1_color: Color = Color(1, 0.5, 0.5)
+export var team2_color: Color = Color(0.5, 0.5, 1)
 
 export var fountain_radius: float = 128
-export var fountain_color: Color = Color(1,1,1)
+export var fountain_color: Color = Color(0.75,0.75,0.75)
 	
 export var draw: bool = false setget drawH
 
@@ -48,8 +49,8 @@ func _draw() -> void:
 	draw_rect(Rect2(Vector2(arena_size-lane_width, 0), Vector2(lane_width,arena_size-lane_curve)), lane_color)
 	draw_circle_arc_poly(Vector2(arena_size-lane_curve, arena_size-lane_curve), lane_curve-lane_width, lane_curve, 90, 180, lane_color)
 	#bases
-	draw_circle_arc_poly(Vector2(0,arena_size), 0, base_radius, 0, 90, base_color)
-	draw_circle_arc_poly(Vector2(arena_size, 0), 0, base_radius, 180, 270, base_color)
+	draw_circle_arc_poly(Vector2(0,arena_size), 0, base_radius, 0, 90, team1_color)
+	draw_circle_arc_poly(Vector2(arena_size, 0), 0, base_radius, 180, 270, team2_color)
 	#fountains
 	draw_circle(Vector2(0, arena_size), fountain_radius, fountain_color)
 	draw_circle(Vector2(arena_size, 0), fountain_radius, fountain_color)

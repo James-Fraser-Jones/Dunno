@@ -18,4 +18,4 @@ func radiusH(r):
 	update()
 
 func _draw() -> void:
-	draw_circle(position + offset, radius, color)
+	draw_circle(offset, radius, color)

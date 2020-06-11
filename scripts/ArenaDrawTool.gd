@@ -1,25 +1,25 @@
 tool
 extends Node2D
 
-export var arena_size: float = 2048
+export var arena_size: float = 8192
 export var arena_color: Color = Color(0,0.5,0)
 
-export var river_width: float = 256
+export var river_width: float = 1024
 export var river_color: Color = Color(0,0,1)
 
-export var lane_width: float = 256
-export var lane_curve: float = 512
+export var lane_width: float = 1024
+export var lane_curve: float = 2048
 export var lane_color: Color = Color(0.7,0.7,0)
 export var corner_color: Color = Color(0,0,0)
 
-export var base_radius: float = 600
-export var team1_color: Color = Color(1, 0.5, 0.5)
-export var team2_color: Color = Color(0.5, 0.5, 1)
+export var base_radius: float = 2400
+export var team1_color: Color = Color(0.5, 0.5, 1)
+export var team2_color: Color = Color(1, 0.5, 0.5)
 
-export var fountain_radius: float = 128
+export var fountain_radius: float = 512
 export var fountain_color: Color = Color(0.75,0.75,0.75)
 
-export var path_radius: float = 128
+export var path_radius: float = 1024
 	
 export var draw: bool = false setget drawH
 export var make_paths: bool = false setget make_paths

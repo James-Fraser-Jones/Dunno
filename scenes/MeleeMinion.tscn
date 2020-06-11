@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/arrow3.png" type="Texture" id=1]
+[ext_resource path="res://scripts/MeleeMinion.gd" type="Script" id=2]
+
+[node name="MeleeMinion" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2.38419e-06 )
+scale = Vector2( 0.853333, 0.853333 )
+texture = ExtResource( 1 )
